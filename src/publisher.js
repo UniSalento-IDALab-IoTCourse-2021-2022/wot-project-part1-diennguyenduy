@@ -33,12 +33,20 @@ client.on("error",function(error){
 
 setInterval(function(){
     ////var readout = sensorLib.read();
-    ////console.log('Temperature:', readout.temperature.toFixed(1) + 'C');
+    //var temperature = readout.temperature.toFixed(1)
+    ////console.log('Temperature:', temperature + 'C');
+    let temperature = (Math.random() * 5 + 35).toFixed(1);  //random in range (35,40)
+    if(temperature < 36 || temperature > 37) {
+        console.log("Dangerous case!");
+        //play alert sound & LED turns on
+        //send message to the doctor
+    }
+
     ////console.log('Humidity: ', readout.humidity.toFixed(1) + '%');
     const data = JSON.stringify({
         'sensor': 'ID1',
         'timestamp': new Date().toISOString(),
-        'temperature': 25
+        'temperature': temperature
     })
     console.log(data);
     client.publish(topicName, data, {qos: 1, retain: true}, (PacketCallback, err) => {
