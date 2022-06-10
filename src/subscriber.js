@@ -1,8 +1,3 @@
-
-
-// TODO: Save received data to MongoDB
-
-
 const mqtt = require('mqtt')
 require('dotenv').config()
 //const client = mqtt.connect(process.env.BROKER_URL)
@@ -10,7 +5,6 @@ require('dotenv').config()
 console.log(process.env);
 const client = mqtt.connect(process.env.LOCALHOST)
 const topicName = 'aedes/test'
-
 
 // connect to same client and subscribe to same topic name
 client.on('connect', () => {
