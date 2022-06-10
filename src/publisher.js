@@ -38,7 +38,7 @@ setInterval(function(){
     const data = JSON.stringify({
         'sensor': 'ID1',
         'timestamp': new Date().toISOString(),
-        'temperature': 23
+        'temperature': 25
     })
     console.log(data);
     client.publish(topicName, data, {qos: 1, retain: true}, (PacketCallback, err) => {

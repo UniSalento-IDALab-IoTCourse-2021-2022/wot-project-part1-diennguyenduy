@@ -1,3 +1,6 @@
+const express = require("express");
+const WebSocket = require('ws');
+const path = require('path');
 const mongodb = require('mongodb');
 const mqtt = require('mqtt')
 require('dotenv').config()
@@ -9,6 +12,31 @@ const topicName = 'aedes/test'
 
 const MongoClient = mongodb.MongoClient;
 const uri = 'mongodb://localhost/';
+const app = express();
+
+const wss = new WebSocket.Server({ port: 3001 });
+
+wss.on('connection', function connection(ws) {
+    ws.on('message', function incoming(message) {
+        console.log('received: %s', message);
+    });
+    ws.send('something');
+});
+
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
+});
+app.use(
+    express.urlencoded({
+        extended: true
+    })
+)
+
+app.use(express.json());
+
+app.get('/dashboard', async (req, res) => {
+    res.sendFile(path.join(__dirname + '/index.html'));
+})
 
 // connect to same client and subscribe to same topic name
 client.on('connect', () => {
@@ -52,6 +80,14 @@ client.on('message', (topic, message, packet) => {
             }
         }
         pushInDb().catch(console.dir);
+        async function pushToClient(){
+            wss.clients.forEach(function each(client) {
+                if (client.readyState === WebSocket.OPEN) {
+                    client.send(temperature);
+                }
+            });
+        }
+        pushToClient().catch(console.dir);
     }
 })
 
