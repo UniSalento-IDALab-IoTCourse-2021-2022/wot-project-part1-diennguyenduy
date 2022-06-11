@@ -15,9 +15,9 @@ require('dotenv').config()
 //the client id is used by the MQTT broker to keep track of clients and and their // state
 const clientId = 'mqttjs_' + Math.random().toString(8).substring(2,4)
 // console.log(process.env.BROKER_URL)
-// const client = mqtt.connect(process.env.BROKER_URL, {clientId:clientId, clean:false, reconnectPeriod:1})
-console.log(process.env.LOCALHOST)
-const client = mqtt.connect(process.env.LOCALHOST, {clientId:clientId, clean:false, reconnectPeriod:1})
+const client = mqtt.connect("mqtt://broker.hivemq.com", {clientId:clientId, clean:false, reconnectPeriod:1})
+// console.log(process.env.LOCALHOST)
+// const client = mqtt.connect(process.env.LOCALHOST, {clientId:clientId, clean:false, reconnectPeriod:1})
 
 // console.log(process.env.BROKER_URL, 'client', clientId)
 
@@ -35,14 +35,22 @@ setInterval(function(){
     ////var readout = sensorLib.read();
     //var temperature = readout.temperature.toFixed(1)
     ////console.log('Temperature:', temperature + 'C');
+
     let temperature = (Math.random() * 5 + 35).toFixed(1);  //random in range (35,40)
-    if(temperature < 36 || temperature > 37) {
+    let heart_rate = Math.floor((Math.random() * 100 + 30));  //random in range (30,130)
+    let oxygen = (Math.random() * 100).toFixed(2);  //random in range (0,100)%
+    if(
+        temperature < 36 ||
+        temperature > 37.5 ||
+        heart_rate < 60 ||
+        heart_rate > 100 ||
+        oxygen < 95
+    ) {
         console.log("Dangerous case!");
         //play alert sound & LED turns on
-        //send message to the doctor
+        //send message to the doctor via Blynk mobile app
     }
 
-    ////console.log('Humidity: ', readout.humidity.toFixed(1) + '%');
     const data = JSON.stringify({
         'sensor': 'ID1',
         'timestamp': new Date().toISOString(),

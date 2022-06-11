@@ -4,10 +4,10 @@ const path = require('path');
 const mongodb = require('mongodb');
 const mqtt = require('mqtt')
 require('dotenv').config()
-//const client = mqtt.connect(process.env.BROKER_URL)
-//const topicName = 'test/tommyhh/connection'
-console.log(process.env);
-const client = mqtt.connect(process.env.LOCALHOST)
+
+//console.log(process.env);
+//const client = mqtt.connect(process.env.LOCALHOST)
+const client = mqtt.connect("mqtt://broker.hivemq.com")
 const topicName = 'aedes/test'
 
 const MongoClient = mongodb.MongoClient;
