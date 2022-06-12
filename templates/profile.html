@@ -172,6 +172,7 @@
 
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script type="text/javascript" src="https://npmcdn.com/Chart.Zoom.js@0.3.0/Chart.Zoom.min.js"></script>
 
 <!--Heading section-->
 <div class="a" style="background-color:#32B1FA;margin-top:0;position:relative;">
@@ -184,10 +185,9 @@
         <a href="/History">History</a>
         <!-- <a href="#contact">Call Doctor</a>  -->
         <a href="/Profile" class="profile">Profile</a>
-
     </div>
-
     <!-- nav end -->
+
     <br>
     <br>
     <br>
@@ -196,7 +196,7 @@
     <br>
 
     <h1>Patient's Profile</h1>
-
+    <br>
     <div class="main-body">
         <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
@@ -216,6 +216,10 @@
                 </div>
                 <div class="card mt-3">
                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">Patient ID</h6>
+                            <span class="text-secondary">17021215</span>
+                        </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">Bed Number</h6>
                             <span class="text-secondary">B123</span>
@@ -298,19 +302,35 @@
                     </div>
                 </div>
                 <div class="row gutters-sm">
-                    <div class="col-sm-6 mb-3">
+                    <div class="col-sm-5 mb-3">
                         <div class="card h-100">
-                            <h5>Oxygen Level</h5>
                             <div class="card-body">
+                                <h4 class="card-title">Oxygen Level</h4>
                                 <canvas id="oxygen-chart" style="width:100%;max-width:600px"></canvas>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 mb-3">
+                    <div class="col-sm-5 mb-3">
                         <div class="card h-100">
-                            <h5>Pulse Rate</h5>
                             <div class="card-body">
+                                <h4 class="card-title">Pulse Rate</h4>
                                 <canvas id="pulse-chart" style="width:100%;max-width:600px"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 mb-3">
+                        <div class="card h-50">
+                            <div class="card-body">
+                                <h4 class="card-title">Temperature</h4>
+                                <br>
+                                <h5>37.5 &#8451;</h5>
+                            </div>
+                        </div>
+                        <div class="card h-50">
+                            <div class="card-body">
+                                <h4 class="card-title">Heart Rate</h4>
+                                <br>
+                                <h5>90 bpm</h5>
                             </div>
                         </div>
                     </div>
@@ -350,6 +370,13 @@
                 },
                 legend: {
                     display: false
+                },
+                zoom: {
+                    // Boolean to enable zooming
+                    enabled: true,
+                    // Zooming directions. Remove the appropriate direction to disable
+                    // Eg. 'y' would only allow zooming in the y direction
+                    mode: 'x',
                 }
             }
         });
@@ -366,7 +393,7 @@
         labels: ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"],
         datasets: [
             {
-                data: [95, 99, 94, 96, 92, 95, 97,90,100],
+                data: [99, 95, 97, 98, 92, 94, 97,90,100],
                 backgroundColor: colors[5],
                 borderColor: colors[2],
                 borderWidth: 4,
@@ -388,6 +415,13 @@
                 },
                 legend: {
                     display: false
+                },
+                zoom: {
+                    // Boolean to enable zooming
+                    enabled: true,
+                    // Zooming directions. Remove the appropriate direction to disable
+                    // Eg. 'y' would only allow zooming in the y direction
+                    mode: 'x',
                 }
             }
         });
