@@ -14,13 +14,10 @@ require('dotenv').config()
 
 //the client id is used by the MQTT broker to keep track of clients and and their // state
 const clientId = 'mqttjs_' + Math.random().toString(8).substring(2,4)
-// console.log(process.env.BROKER_URL)
-const client = mqtt.connect("mqtt://broker.hivemq.com", {clientId:clientId, clean:false, reconnectPeriod:1})
 // console.log(process.env.LOCALHOST)
 // const client = mqtt.connect(process.env.LOCALHOST, {clientId:clientId, clean:false, reconnectPeriod:1})
 
-// console.log(process.env.BROKER_URL, 'client', clientId)
-
+const client = mqtt.connect("mqtt://broker.hivemq.com", {clientId:clientId, clean:false, reconnectPeriod:1})
 const topicName = 'aedes/test'
 
 client.on("connect",function(connack){
