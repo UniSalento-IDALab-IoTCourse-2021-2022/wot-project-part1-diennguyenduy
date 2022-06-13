@@ -1,505 +1,638 @@
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
-    <link href="static/style.css" rel="stylesheet">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <meta charset="UTF-8" />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap"
+          rel="stylesheet"
+  />
+  <link href="static/style.css" rel="stylesheet" />
+  <!-- Latest compiled and minified CSS -->
+  <link
+          rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+  />
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- Latest compiled JavaScript -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <!-- Latest compiled JavaScript -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+          crossorigin="anonymous"
+  />
 
-    <style>
-        body{
-            margin:0;
-            padding:0;
-        }
-        .center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-        }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+    }
 
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-        h1 {
-            text-align: center;
-            color: rgb(12, 12, 12)
-        }
+    h1 {
+      text-align: center;
+      color: rgb(12, 12, 12);
+    }
 
-        h3 {
-            text-align: center;
-            color: white;
-        }
+    h3 {
+      text-align: center;
+      color: white;
+    }
 
-        p {
-            text-align: center;
-        }
+    p {
+      text-align: center;
+    }
 
-        div {
-            text-align: center;
-        }
+    div {
+      text-align: center;
+    }
 
-        .mySlides {
-            display: none;
-        }
+    .mySlides {
+      display: none;
+    }
 
-        .button {
-            margin-top:20px;
-            background-color: #03506F;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-        a.profile{
-            position: absolute;
-            right: 0;
-            width: 100px;
-            height: 120px;
-            border: 0px solid blue;
-        }
-    </style>
-    <style>
-        body {margin:0;}
+    .button {
+      margin-top: 20px;
+      background-color: #03506f;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    a.profile {
+      position: absolute;
+      right: 0;
+      width: 100px;
+      height: 120px;
+      border: 0px solid blue;
+    }
+  </style>
+  <style>
+    body {
+      margin: 0;
+    }
 
-        .nvbar {
-            overflow: hidden;
-            background-color: #333;
-            position: fixed;
-            top: 0;
-            width: 100%;
-        }
+    .nvbar {
+      overflow: hidden;
+      background-color: #333;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
 
-        .nvbar a {
-            float: left;
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
+    .nvbar a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
 
-        .nvbar a:hover {
-            background: #ddd;
-            color: black;
-        }
+    .nvbar a:hover {
+      background: #ddd;
+      color: black;
+    }
 
-        .main {
-            padding: 16px;
-            margin-top: 30px;
-            height: 1500px; /* Used in this example to enable scrolling */
-        }
-    </style>
+    .main {
+      padding: 16px;
+      margin-top: 30px;
+      height: 1500px; /* Used in this example to enable scrolling */
+    }
+  </style>
 
-    <!-- Profile -->
-    <style>
-        body{
-            margin-top:20px;
-            color: #1a202c;
-            text-align: left;
-            background-color: #e2e8f0;
-        }
-        .main-body {
-            padding: 15px;
-        }
-        .card {
-            box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
-        }
+  <!-- Profile -->
+  <style>
+    body {
+      margin-top: 20px;
+      color: #1a202c;
+      text-align: left;
+      background-color: #e2e8f0;
+    }
+    .main-body {
+      padding: 15px;
+    }
+    .card {
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+      0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
 
-        .card {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            word-wrap: break-word;
-            background-color: #fff;
-            background-clip: border-box;
-            border: 0 solid rgba(0,0,0,.125);
-            border-radius: .25rem;
-        }
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: #fff;
+      background-clip: border-box;
+      border: 0 solid rgba(0, 0, 0, 0.125);
+      border-radius: 0.25rem;
+    }
 
-        .card-body {
-            flex: 1 1 auto;
-            min-height: 1px;
-            padding: 1rem;
-        }
+    .card-body {
+      flex: 1 1 auto;
+      min-height: 1px;
+      padding: 1rem;
+    }
 
-        .gutters-sm {
-            margin-right: -8px;
-            margin-left: -8px;
-        }
+    .gutters-sm {
+      margin-right: -8px;
+      margin-left: -8px;
+    }
 
-        .gutters-sm>.col, .gutters-sm>[class*=col-] {
-            padding-right: 8px;
-            padding-left: 8px;
-        }
-        .mb-3, .my-3 {
-            margin-bottom: 1rem!important;
-        }
+    .gutters-sm > .col,
+    .gutters-sm > [class*="col-"] {
+      padding-right: 8px;
+      padding-left: 8px;
+    }
+    .mb-3,
+    .my-3 {
+      margin-bottom: 1rem !important;
+    }
 
-        .bg-gray-300 {
-            background-color: #e2e8f0;
-        }
-        .h-100 {
-            height: 100%!important;
-        }
-        .shadow-none {
-            box-shadow: none!important;
-        }
-    </style>
+    .bg-gray-300 {
+      background-color: #e2e8f0;
+    }
+    .h-100 {
+      height: 100% !important;
+    }
+    .shadow-none {
+      box-shadow: none !important;
+    }
+  </style>
 
-
-    <title>Advanced Health Care Monitoring System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <title>Advanced Health Care Monitoring System</title>
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+          crossorigin="anonymous"
+  />
 </head>
 
 <body onload="startup();">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-<script type="text/javascript" src="https://npmcdn.com/Chart.Zoom.js@0.3.0/Chart.Zoom.min.js"></script>
+<script
+        type="text/javascript"
+        src="https://npmcdn.com/Chart.Zoom.js@0.3.0/Chart.Zoom.min.js"
+></script>
 
 <!--Heading section-->
-<div class="a" style="background-color:#32B1FA;margin-top:0;position:relative;">
-    <!-- <div class="container"></div>  -->
-    <!-- Navbar sec -->
-    <div class="nvbar">
-        <a href="/">Home</a>
-        <a href="/#real-time">Live Report</a>
-        <a href="/MedTime">Medicine Timing</a>
-        <a href="/History">History</a>
-        <!-- <a href="#contact">Call Doctor</a>  -->
-        <a href="/Profile" class="profile">Profile</a>
-    </div>
-    <!-- nav end -->
+<div
+        class="a"
+        style="background-color: #32b1fa; margin-top: 0; position: relative"
+>
+  <!-- <div class="container"></div>  -->
+  <!-- Navbar sec -->
+  <div class="nvbar">
+    <a href="/">Home</a>
+    <a href="/live-data">Live Report</a>
+    <a href="/medicine-time">Medicine Timing</a>
+    <a href="/history">History</a>
+    <a href="/patient-profile" class="profile">Profile</a>
+  </div>
+  <!-- nav end -->
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
 
-    <h1>Patient's Profile</h1>
-    <br>
-    <div class="main-body">
-        <div class="row gutters-sm">
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-column align-items-center text-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
-                            <div class="mt-3">
-                                <h4>Duy Dien Nguyen</h4>
-                                <!-- <p class="text-secondary mb-1">Full Stack Developer</p> -->
-                                <p class="text-muted font-size-sm">Lecce, LE, Italy</p>
-                                <button class="btn btn-outline-primary">Call</button>
-                                <button class="btn btn-outline-primary">Messages</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mt-3">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <h6 class="mb-0">Patient ID</h6>
-                            <span class="text-secondary">17021215</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <h6 class="mb-0">Bed Number</h6>
-                            <span class="text-secondary">B123</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <h6 class="mb-0">Doctor</h6>
-                            <span class="text-secondary">Dr. John</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <h6 class="mb-0">Nurse</h6>
-                            <span class="text-secondary">Alice</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <h6 class="mb-0">Guardian</h6>
-                            <span class="text-secondary">Bob</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <h6 class="mb-0">Guardian's Mobile</h6>
-                            <span class="text-secondary">+39 111 222 3456</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <a class="btn btn-secondary" target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
-                        </li>
-                    </ul>
-                </div>
+  <h1>Patient's Dashboard</h1>
+  <br />
+  <hr />
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img
+                      src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                      alt="Admin"
+                      class="rounded-circle"
+                      width="150"
+              />
+              <div class="mt-3">
+                <h4>Duy Dien Nguyen</h4>
+                <!-- <p class="text-secondary mb-1">Full Stack Developer</p> -->
+                <p class="text-muted font-size-sm">Lecce, LE, Italy</p>
+                <button class="btn btn-outline-primary">Call</button>
+                <button class="btn btn-outline-primary">Messages</button>
+              </div>
             </div>
-            <div class="col-md-8">
-                <div class="row gutters-sm">
-                    <div class="col-sm-6 mb-3">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Full Name</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        Duy Dien Nguyen
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Age</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        23
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Email</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        abc@example.com
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Phone</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        +39 123 456 7890
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Address</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        Lecce, LE, Italy
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <a class="btn btn-secondary" target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 mb-3">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Blood Type</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        O
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Allergies</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        No
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Short-sighted</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        No
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Diseases</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        Gastroesophageal reflux, Hepatitis B
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Abstain</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        Carbonated and alcoholic beverages
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <a class="btn btn-secondary" target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row gutters-sm">
-                    <div class="col-sm-5 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">Oxygen Level (%)</h4>
-                                <canvas id="oxygen-chart" style="width:100%;max-width:600px"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-5 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">Pulse Rate (BPM)</h4>
-                                <canvas id="pulse-chart" style="width:100%;max-width:600px"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">Temperature</h4>
-                                <h5>(&#8451;)</h5>
-                                <h5 id="temperature">37.0</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <div class="card mt-3">
+          <ul class="list-group list-group-flush">
+            <li
+                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+            >
+              <h6 class="mb-0">Patient ID</h6>
+              <span class="text-secondary">17021215</span>
+            </li>
+            <li
+                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+            >
+              <h6 class="mb-0">Bed Number</h6>
+              <span class="text-secondary">B123</span>
+            </li>
+            <li
+                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+            >
+              <h6 class="mb-0">Doctor</h6>
+              <span class="text-secondary">Dr. John</span>
+            </li>
+            <li
+                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+            >
+              <h6 class="mb-0">Guardian</h6>
+              <span class="text-secondary">Bob</span>
+            </li>
+            <li
+                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+            >
+              <h6 class="mb-0">Guardian's Mobile</h6>
+              <span class="text-secondary">+39 111 222 3456</span>
+            </li>
+            <li
+                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+            >
+              <a
+                      class="btn btn-secondary"
+                      target="__blank"
+                      href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills"
+              >Edit</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-8 mb-3">
+        <div class="row gutters-sm">
+          <div class="col-sm-6 mb-3">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Full Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">Duy Dien Nguyen</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Age</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">23</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Email</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">abc@example.com</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Phone</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    +39 123 456 7890
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Address</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    Lecce, LE, Italy
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-12">
+                    <a
+                            class="btn btn-secondary"
+                            target="__blank"
+                            href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills"
+                    >Edit</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 mb-3">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Blood Type</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">O</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Allergies</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">No</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Short-sighted</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">No</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Diseases</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    Gastroesophageal reflux, Hepatitis B
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Abstain</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    Carbonated and alcoholic beverages
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-12">
+                    <a
+                            class="btn btn-secondary"
+                            target="__blank"
+                            href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills"
+                    >Edit</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row gutters-sm">
+          <div class="col-sm-4 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h4 class="card-title">Oxygen Level (%)</h4>
+                <canvas
+                        id="oxygen-chart"
+                        style="width: 100%; max-width: 600px"
+                ></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h4 class="card-title">Pulse Rate (BPM)</h4>
+                <canvas
+                        id="pulse-chart"
+                        style="width: 100%; max-width: 600px"
+                ></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h4 class="card-title">Body Temperature (&#8451;)</h4>
+                <canvas
+                        id="temperature-chart"
+                        style="width: 100%; max-width: 600px"
+                ></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 <script>
-    var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+  var colors = [
+    "#007bff",
+    "#28a745",
+    "#333333",
+    "#c3e6cb",
+    "#dc3545",
+    "#6c757d",
+  ];
 
-    /* large line chart */
-    var chLine = document.getElementById("oxygen-chart");
-    var chartData = {
-        labels:
-            ["Jan", "Feb", "Mar", "Apr",
-            "May", "Jun", "Jul", "Aug",
-            "Sep", "Oct", "Nov", "Dec"],
-        datasets: [
+  /* large line chart */
+  var chLine = document.getElementById("oxygen-chart");
+  var chartData = {
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+    ],
+    datasets: [
+      {
+        data: [100, 95, 97, 93, 99, 98, 96, 92, 97],
+        backgroundColor: colors[3],
+        borderColor: colors[1],
+        borderWidth: 3,
+      },
+    ],
+  };
+
+  if (chLine) {
+    new Chart(chLine, {
+      type: "line",
+      data: chartData,
+      options: {
+        scales: {
+          yAxes: [
             {
-                data:[100, 95, 97, 93, 99,
-                    98, 96,92, 97],
-                backgroundColor: colors[3],
-                borderColor: colors[1],
-                borderWidth: 4,
-                pointBackgroundColor: colors[1]
-            }]
-    };
-
-    if (chLine) {
-        new Chart(chLine, {
-            type: 'line',
-            data: chartData,
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: false
-                        }
-                    }]
-                },
-                legend: {
-                    display: false
-                },
-                zoom: {
-                    // Boolean to enable zooming
-                    enabled: true,
-                    // Zooming directions. Remove the appropriate direction to disable
-                    // Eg. 'y' would only allow zooming in the y direction
-                    mode: 'x',
-                }
-            }
-        });
-    }
-</script>
-
-
-<script>
-    var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
-
-    /* large line chart */
-    var chLine = document.getElementById("pulse-chart");
-    var chartData = {
-        labels: ["Jan", "Feb", "Mar", "Apr",
-                "May", "Jun", "Jul", "Aug",
-                "Sep", "Oct", "Nov", "Dec"],
-        datasets: [
-            {
-                data: [90, 80, 95, 85,
-                    100, 105, 94, 99,
-                    87],
-                backgroundColor: colors[5],
-                borderColor: colors[2],
-                borderWidth: 4,
-                pointBackgroundColor: colors[1]
-            }]
-    };
-
-    if (chLine) {
-        new Chart(chLine, {
-            type: 'line',
-            data: chartData,
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: false
-                        }
-                    }]
-                },
-                legend: {
-                    display: false
-                },
-                zoom: {
-                    // Boolean to enable zooming
-                    enabled: true,
-                    // Zooming directions. Remove the appropriate direction to disable
-                    // Eg. 'y' would only allow zooming in the y direction
-                    mode: 'x',
-                }
-            }
-        });
-    }
+              ticks: {
+                beginAtZero: false,
+              },
+            },
+          ],
+        },
+        legend: {
+          display: false,
+        },
+        zoom: {
+          // Boolean to enable zooming
+          enabled: true,
+          // Zooming directions. Remove the appropriate direction to disable
+          // Eg. 'y' would only allow zooming in the y direction
+          mode: "x",
+        },
+      },
+    });
+  }
 </script>
 <script>
-    function startup() {
-        var socketExample = new WebSocket("ws://localhost:3001");
-        socketExample.onopen = function (event) {
-            socketExample.send("Text to be sent to the server!");
-        };
-        socketExample.onmessage = function (event) {
-            console.log(event.data);
-            document.getElementById("temperature").innerHTML = event.data;
-        }
-    }
+  var colors = [
+    "#007bff",
+    "#28a745",
+    "#333333",
+    "#c3e6cb",
+    "#dc3545",
+    "#6c757d",
+  ];
+
+  /* large line chart */
+  var chLine = document.getElementById("pulse-chart");
+  var chartData = {
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+    ],
+    datasets: [
+      {
+        data: [90, 80, 95, 85, 100, 105, 94, 99, 87],
+        backgroundColor: colors[5],
+        borderColor: colors[2],
+        borderWidth: 3,
+      },
+    ],
+  };
+
+  if (chLine) {
+    new Chart(chLine, {
+      type: "line",
+      data: chartData,
+      options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: false,
+              },
+            },
+          ],
+        },
+        legend: {
+          display: false,
+        },
+        zoom: {
+          // Boolean to enable zooming
+          enabled: true,
+          // Zooming directions. Remove the appropriate direction to disable
+          // Eg. 'y' would only allow zooming in the y direction
+          mode: "x",
+        },
+      },
+    });
+  }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+<script>
+  var colors = [
+    "#e4fd00",
+    "#fd0000",
+    "#fa5858",
+    "#f37e7e",
+    "#f1707d",
+    "#6c757d",
+  ];
+
+  /* large line chart */
+  var chLine = document.getElementById("temperature-chart");
+  var chartData = {
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+    ],
+    datasets: [
+      {
+        data: [37.5, 36.7, 35.6, 37, 37.5, 38, 36.9, 36.5, 37.6],
+        backgroundColor: colors[3],
+        borderColor: colors[1],
+        borderWidth: 3,
+      },
+    ],
+  };
+
+  if (chLine) {
+    new Chart(chLine, {
+      type: "line",
+      data: chartData,
+      options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: false,
+              },
+            },
+          ],
+        },
+        legend: {
+          display: false,
+        },
+        zoom: {
+          // Boolean to enable zooming
+          enabled: true,
+          // Zooming directions. Remove the appropriate direction to disable
+          // Eg. 'y' would only allow zooming in the y direction
+          mode: "x",
+        },
+      },
+    });
+  }
+</script>
+</script>
+<script src="scripts.js"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"
+></script>
 </body>
 </html>
