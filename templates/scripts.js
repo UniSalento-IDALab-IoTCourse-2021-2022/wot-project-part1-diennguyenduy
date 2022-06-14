@@ -8,4 +8,3 @@ function startup() {
         document.getElementById("temperature").innerHTML = event.data;
     }
 }
-

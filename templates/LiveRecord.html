@@ -279,20 +279,15 @@
                 <div class="row gutters-sm">
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">Pulse Rate (BPM)</h4>
-                                <canvas
-                                        id="pulse-chart"
-                                        style="width: 100%; max-width: 600px"
-                                ></canvas>
-                            </div>
+                            <h4 class="card-title">Overview</h4>
+                            <div class="center" id="overview-chart" style="width: 100%; max-width: 600px"></div>
                         </div>
                     </div>
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
                                 <h4 class="card-title">Pulse Rate (BPM)</h4>
-                                <div id="chart_div" style="width: 100%; max-width: 600px"></div>
+                                <div class="center" id="pulse-rate-chart" style="width: 100%; max-width: 600px;"></div>
                             </div>
                         </div>
                     </div>
@@ -302,10 +297,7 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h4 class="card-title">Oxygen Level (%)</h4>
-                                <canvas
-                                        id="oxygen-chart"
-                                        style="width: 100%; max-width: 600px"
-                                ></canvas>
+                                <div class="center" id="oxygen-chart" style="width: 100%; max-width: 600px;"></div>
                             </div>
                         </div>
                     </div>
@@ -313,10 +305,7 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h4 class="card-title">Temperature (&#8451;)</h4>
-                                <canvas
-                                        id="temperature-chart"
-                                        style="width: 100%; max-width: 600px"
-                                ></canvas>
+                                <div class="center" id="temperature-chart" style="width: 100%; max-width: 600px;"></div>
                             </div>
                         </div>
                     </div>
@@ -326,6 +315,21 @@
     </div>
 </div>
 
+<!--<script>-->
+<!--    function startup() {-->
+<!--        var socketExample = new WebSocket("ws://localhost:3001");-->
+<!--        let data;-->
+<!--        socketExample.onopen = function (event) {-->
+<!--            socketExample.send("Text to be sent to the server!");-->
+<!--        };-->
+<!--        socketExample.onmessage = function (event) {-->
+<!--            console.log(event.data);-->
+<!--            data = event.data;-->
+<!--            //document.getElementById("live-temperature").innerHTML = data;-->
+<!--        }-->
+<!--        return data;-->
+<!--    }-->
+<!--</script>-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
     // load current chart package
@@ -343,15 +347,15 @@
         // create options object with titles, colors, etc.
         let options = {
             hAxis: {
-                title: "Time"
+                title: "Time (s)"
             },
             vAxis: {
-                title: "Pulse rate"
+                title: "Pulse rate (bpm)"
             }
         };
         // draw chart on load
         let chart = new google.visualization.LineChart(
-            document.getElementById("chart_div")
+            document.getElementById("overview-chart")
         );
         chart.draw(data, options);
         // interval for adding new data every 250ms
@@ -359,13 +363,112 @@
         setInterval(function() {
             // instead of this random, you can make an ajax call for the current cpu usage or what ever data you want to display
             let random = Math.floor(Math.random() * 100 + 30);
-            data.addRow([index, random]);
+            data.addRow(
+                [index, random],
+                [index, random],
+                [index, random]
+            );
             chart.draw(data, options);
             index++;
-        }, 1000);
+        }, 3000);
     }
 </script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['gauge']});
+    google.charts.setOnLoadCallback(drawChart);
 
+    function drawChart() {
+        var oxygenData = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['(%)', 90]
+        ]);
+
+        var options = {
+            width: 600, height: 180,
+            redFrom: 0, redTo: 90,
+            yellowFrom: 90, yellowTo: 95,
+            greenFrom:95, greenTo: 100,
+            minorTicks: 5
+        };
+
+        var oxygenChart = new google.visualization.Gauge(document.getElementById('oxygen-chart'));
+
+        oxygenChart.draw(oxygenData, options);
+
+        setInterval(function() {
+            oxygenData.setValue(0, 1, (Math.random() * 50 + 50).toFixed(2));
+            oxygenChart.draw(oxygenData, options);
+        }, 2000);
+    }
+</script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['gauge']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var socketExample = new WebSocket("ws://localhost:3001");
+        let temperature;
+        socketExample.onopen = function (event) {
+            socketExample.send("Text to be sent to the server!");
+        };
+
+        var temperatureData = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['(\u00B0C)', 36.5]
+        ]);
+
+        var options = {
+            min: 35,
+            max: 45,
+            width: 600, height: 180,
+            redFrom: 37.6, redTo: 45,
+            greenFrom: 36.4, greenTo: 37.6,
+            yellowFrom:35, yellowTo: 36.4,
+            minorTicks: 5
+        };
+
+        var temperatureChart = new google.visualization.Gauge(document.getElementById('temperature-chart'));
+        temperatureChart.draw(temperatureData, options);
+
+        socketExample.onmessage = function (event) {
+            console.log(event.data);
+            temperature = event.data;
+            temperatureData.setValue(0, 1, temperature);
+            temperatureChart.draw(temperatureData, options);
+        };
+    }
+</script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['gauge']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var pulseData = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['(BPM)', 0]
+        ]);
+
+        var options = {
+            min: 0,
+            max: 200,
+            width: 600, height: 180,
+            redFrom: 0, redTo: 65,
+            greenFrom: 65, greenTo: 140,
+            yellowFrom:140, yellowTo: 200,
+            minorTicks: 5
+        };
+
+        var pulseChart = new google.visualization.Gauge(document.getElementById('pulse-rate-chart'));
+
+        pulseChart.draw(pulseData, options);
+
+        setInterval(function() {
+            pulseData.setValue(0, 1, Math.floor(Math.random() * 130 + 50));
+            pulseChart.draw(pulseData, options);
+        }, 3000);
+    }
+</script>
 <script>
     var colors = [
         "#007bff",
