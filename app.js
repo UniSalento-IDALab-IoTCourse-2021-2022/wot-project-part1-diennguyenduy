@@ -75,9 +75,18 @@ client.on("message", (topic, message, packet) => {
     if (topic === topicName) {
         var rev_message = JSON.parse(message);
         console.log(rev_message);
-        var temperature = rev_message.temperature;
-        var timestamp = rev_message.timestamp;
-        var sensor = rev_message.sensor;
+        // var patient_id = rev_message.patient_id;
+        // var timestamp = rev_message.timestamp;
+        // var temperature = rev_message.temperature;
+        // var pulse_rate = rev_message.pulse_rate;
+        // var oxygen_level = rev_message.oxygen_level;
+        // const data = {
+        //     patient: patient_id,
+        //     timestamp: timestamp,
+        //     value: temperature,
+        //     pulse: pulse_rate,
+        //     oxygen: oxygen_level
+        // };
         async function pushInDb() {
             const client = new MongoClient(uri, { useUnifiedTopology: true });
             try {
@@ -86,14 +95,15 @@ client.on("message", (topic, message, packet) => {
                 const database = client.db("TemperatureDB");
                 const temperatureColl = database.collection("temperature");
                 // create a document to be inserted
-                const doc = {
-                    value: temperature,
-                    timestamp: timestamp,
-                    sensorId: sensor,
-                    roomId: "room1",
-                };
+                // const doc = {
+                //     patient: patient_id,
+                //     timestamp: timestamp,
+                //     value: temperature,
+                //     pulse: pulse_rate,
+                //     oxygen: oxygen_level
+                // };
 
-                const result = await temperatureColl.insertOne(doc);
+                const result = await temperatureColl.insertOne(rev_message);
                 console.log(
                     `${result.insertedCount} documents were inserted with the _id: ${result.insertedId}`
                 );
@@ -105,7 +115,7 @@ client.on("message", (topic, message, packet) => {
         async function pushToClient() {
             wss.clients.forEach(function each(client) {
                 if (client.readyState === WebSocket.OPEN) {
-                    client.send(temperature);
+                    client.send(JSON.stringify(rev_message));
                 }
             });
         }

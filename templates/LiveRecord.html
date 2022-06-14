@@ -292,20 +292,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="row gutters-sm">
+                <div class="row gutters-sm mb-3">
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h4 class="card-title">Oxygen Level (%)</h4>
-                                <div class="center" id="oxygen-chart" style="width: 100%; max-width: 600px;"></div>
+                                <h4 class="card-title">Body Temperature (&#8451;C)</h4>
+                                <div class="center" id="body-temperature-chart" style="width: 100%; max-width: 600px;"></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h4 class="card-title">Temperature (&#8451;)</h4>
-                                <div class="center" id="temperature-chart" style="width: 100%; max-width: 600px;"></div>
+                                <h4 class="card-title">Oxygen Level (%)</h4>
+                                <div class="center" id="oxygen-level-chart" style="width: 100%; max-width: 600px;"></div>
                             </div>
                         </div>
                     </div>
@@ -315,21 +315,13 @@
     </div>
 </div>
 
-<!--<script>-->
-<!--    function startup() {-->
-<!--        var socketExample = new WebSocket("ws://localhost:3001");-->
-<!--        let data;-->
-<!--        socketExample.onopen = function (event) {-->
-<!--            socketExample.send("Text to be sent to the server!");-->
-<!--        };-->
-<!--        socketExample.onmessage = function (event) {-->
-<!--            console.log(event.data);-->
-<!--            data = event.data;-->
-<!--            //document.getElementById("live-temperature").innerHTML = data;-->
-<!--        }-->
-<!--        return data;-->
-<!--    }-->
-<!--</script>-->
+<script>
+    var socketExample = new WebSocket("ws://localhost:3001");
+
+    socketExample.onopen = function (event) {
+        socketExample.send("Text to be sent to the server!");
+    };
+</script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
     // load current chart package
@@ -378,95 +370,71 @@
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-        var oxygenData = google.visualization.arrayToDataTable([
+        var temperature_data = google.visualization.arrayToDataTable([
             ['Label', 'Value'],
-            ['(%)', 90]
+            ['\u00B0C', 0]
+        ]);
+        var pulse_data = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['BPM', 0]
+        ]);
+        var oxygen_data = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['%', 0]
         ]);
 
-        var options = {
-            width: 600, height: 180,
-            redFrom: 0, redTo: 90,
-            yellowFrom: 90, yellowTo: 95,
-            greenFrom:95, greenTo: 100,
-            minorTicks: 5
-        };
+        var options = [
+            {
+                min: 35, max: 45,
+                width: 600, height: 180,
+                redFrom: 30, redTo: 35.6,
+                greenFrom: 35.6, greenTo: 36.7,
+                yellowFrom:36.7, yellowTo: 45,
+                minorTicks: 5
+            },
+            {
+                min: 0, max: 200,
+                width: 600, height: 180,
+                redFrom: 0, redTo: 65,
+                greenFrom: 65, greenTo: 140,
+                yellowFrom:140, yellowTo: 200,
+                minorTicks: 5
+            },
+            {
+                min: 0, max: 100,
+                width: 600, height: 180,
+                redFrom: 0, redTo: 90,
+                yellowFrom:90, yellowTo: 95,
+                greenFrom: 95, greenTo: 100,
+                minorTicks: 5
+            }
+        ];
 
-        var oxygenChart = new google.visualization.Gauge(document.getElementById('oxygen-chart'));
+        var temperature_chart = new google.visualization.Gauge(document.getElementById('body-temperature-chart'));
+        var pulse_chart = new google.visualization.Gauge(document.getElementById('pulse-rate-chart'));
+        var oxygen_chart = new google.visualization.Gauge(document.getElementById('oxygen-level-chart'));
 
-        oxygenChart.draw(oxygenData, options);
+        temperature_chart.draw(temperature_data, options[0]);
+        pulse_chart.draw(pulse_data, options[1]);
+        oxygen_chart.draw(oxygen_data, options[2]);
 
-        setInterval(function() {
-            oxygenData.setValue(0, 1, (Math.random() * 50 + 50).toFixed(2));
-            oxygenChart.draw(oxygenData, options);
-        }, 2000);
-    }
-</script>
-<script type="text/javascript">
-    google.charts.load('current', {'packages':['gauge']});
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        var socketExample = new WebSocket("ws://localhost:3001");
-        let temperature;
-        socketExample.onopen = function (event) {
-            socketExample.send("Text to be sent to the server!");
-        };
-
-        var temperatureData = google.visualization.arrayToDataTable([
-            ['Label', 'Value'],
-            ['(\u00B0C)', 36.5]
-        ]);
-
-        var options = {
-            min: 35,
-            max: 45,
-            width: 600, height: 180,
-            redFrom: 37.6, redTo: 45,
-            greenFrom: 36.4, greenTo: 37.6,
-            yellowFrom:35, yellowTo: 36.4,
-            minorTicks: 5
-        };
-
-        var temperatureChart = new google.visualization.Gauge(document.getElementById('temperature-chart'));
-        temperatureChart.draw(temperatureData, options);
+        // setInterval(function() {
+        //     pulseData.setValue(0, 1, Math.floor(Math.random() * 130 + 50));
+        //     pulseChart.draw(pulseData, options);
+        // }, 3000);
 
         socketExample.onmessage = function (event) {
-            console.log(event.data);
-            temperature = event.data;
-            temperatureData.setValue(0, 1, temperature);
-            temperatureChart.draw(temperatureData, options);
+            const object = JSON.parse(event.data);
+            console.log('Websocket received: ', object);
+
+            temperature_data.setValue(0, 1, object.temperature);
+            pulse_data.setValue(0, 1, object.pulse_rate);
+            oxygen_data.setValue(0, 1, object.oxygen_level);
+
+            temperature_chart.draw(temperature_data, options[0]);
+            pulse_chart.draw(pulse_data, options[1]);
+            oxygen_chart.draw(oxygen_data, options[2]);
         };
-    }
-</script>
-<script type="text/javascript">
-    google.charts.load('current', {'packages':['gauge']});
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-
-        var pulseData = google.visualization.arrayToDataTable([
-            ['Label', 'Value'],
-            ['(BPM)', 0]
-        ]);
-
-        var options = {
-            min: 0,
-            max: 200,
-            width: 600, height: 180,
-            redFrom: 0, redTo: 65,
-            greenFrom: 65, greenTo: 140,
-            yellowFrom:140, yellowTo: 200,
-            minorTicks: 5
-        };
-
-        var pulseChart = new google.visualization.Gauge(document.getElementById('pulse-rate-chart'));
-
-        pulseChart.draw(pulseData, options);
-
-        setInterval(function() {
-            pulseData.setValue(0, 1, Math.floor(Math.random() * 130 + 50));
-            pulseChart.draw(pulseData, options);
-        }, 3000);
     }
 </script>
 <script>
@@ -530,131 +498,6 @@
             },
         });
     }
-</script>
-<script>
-    var colors = [
-        "#007bff",
-        "#28a745",
-        "#333333",
-        "#c3e6cb",
-        "#dc3545",
-        "#6c757d",
-    ];
-
-    /* large line chart */
-    var chLine = document.getElementById("pulse-chart");
-    var chartData = {
-        labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-        ],
-        datasets: [
-            {
-                data: [90, 80, 95, 85, 100, 105, 94, 99, 87],
-                backgroundColor: colors[5],
-                borderColor: colors[2],
-                borderWidth: 3,
-            },
-        ],
-    };
-
-    if (chLine) {
-        new Chart(chLine, {
-            type: "line",
-            data: chartData,
-            options: {
-                scales: {
-                    yAxes: [
-                        {
-                            ticks: {
-                                beginAtZero: false,
-                            },
-                        },
-                    ],
-                },
-                legend: {
-                    display: false,
-                },
-                zoom: {
-                    // Boolean to enable zooming
-                    enabled: true,
-                    // Zooming directions. Remove the appropriate direction to disable
-                    // Eg. 'y' would only allow zooming in the y direction
-                    mode: "x",
-                },
-            },
-        });
-    }
-</script>
-<script>
-    var colors = [
-        "#e4fd00",
-        "#fd0000",
-        "#fa5858",
-        "#f37e7e",
-        "#f1707d",
-        "#6c757d",
-    ];
-
-    /* large line chart */
-    var chLine = document.getElementById("temperature-chart");
-    var chartData = {
-        labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-        ],
-        datasets: [
-            {
-                data: [37.5, 36.7, 35.6, 37, 37.5, 38, 36.9, 36.5, 37.6],
-                backgroundColor: colors[3],
-                borderColor: colors[1],
-                borderWidth: 3,
-            },
-        ],
-    };
-
-    if (chLine) {
-        new Chart(chLine, {
-            type: "line",
-            data: chartData,
-            options: {
-                scales: {
-                    yAxes: [
-                        {
-                            ticks: {
-                                beginAtZero: false,
-                            },
-                        },
-                    ],
-                },
-                legend: {
-                    display: false,
-                },
-                zoom: {
-                    // Boolean to enable zooming
-                    enabled: true,
-                    // Zooming directions. Remove the appropriate direction to disable
-                    // Eg. 'y' would only allow zooming in the y direction
-                    mode: "x",
-                },
-            },
-        });
-    }
-</script>
 </script>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"

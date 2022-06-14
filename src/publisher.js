@@ -48,13 +48,15 @@ setInterval(function () {
   ) {
     console.log("Dangerous case!");
     //play alert sound & LED turns on
-    //send message to the doctor via Blynk mobile app
+    //send message to the doctor & patient's family via twillio or vonage
   }
 
   const data = JSON.stringify({
-    sensor: "ID1",
+    patient_id: clientId,
     timestamp: new Date().toISOString(),
     temperature: temperature,
+    pulse_rate: heart_rate,
+    oxygen_level: oxygen
   });
   console.log(data);
   client.publish(
