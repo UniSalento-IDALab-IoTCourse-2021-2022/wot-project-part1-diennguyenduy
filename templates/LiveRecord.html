@@ -333,17 +333,24 @@
     function drawChart() {
         // create data object with default value
         let data = google.visualization.arrayToDataTable([
-            ["Second", "Pulse rate"],
-            [0, 0]
+            ["Second", "Pulse rate", "Oxygen", "Temperature"],
+            [0, 0, 0, 0]
         ]);
         // create options object with titles, colors, etc.
         let options = {
             hAxis: {
-                title: "Time (s)"
+                title: "Time (3x)"
             },
             vAxis: {
-                title: "Pulse rate (bpm)"
-            }
+                title: "Value"
+            },
+            animation:{
+                duration: 1000,
+                easing: 'out',
+            },
+            //curveType: 'function',
+            //smoothline: 'true',
+            legend: { position: 'top' }
         };
         // draw chart on load
         let chart = new google.visualization.LineChart(
@@ -354,11 +361,11 @@
         let index = 0;
         setInterval(function() {
             // instead of this random, you can make an ajax call for the current cpu usage or what ever data you want to display
-            let random = Math.floor(Math.random() * 100 + 30);
+            let random1 = Math.floor(Math.random() * 100 + 30);
+            let random2 = parseFloat((Math.random() * 20 + 80).toFixed(2));
+            let random3 = parseFloat((Math.random() * 10 + 35).toFixed(1));
             data.addRow(
-                [index, random],
-                [index, random],
-                [index, random]
+                [index, random1, random2, random3]
             );
             chart.draw(data, options);
             index++;
@@ -435,68 +442,6 @@
             pulse_chart.draw(pulse_data, options[1]);
             oxygen_chart.draw(oxygen_data, options[2]);
         };
-    }
-</script>
-<script>
-    var colors = [
-        "#007bff",
-        "#28a745",
-        "#333333",
-        "#c3e6cb",
-        "#dc3545",
-        "#6c757d",
-    ];
-
-    /* large line chart */
-    var chLine = document.getElementById("oxygen-chart");
-    var chartData = {
-        labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-        ],
-        datasets: [
-            {
-                data: [100, 95, 97, 93, 99, 98, 96, 92, 97],
-                backgroundColor: colors[3],
-                borderColor: colors[1],
-                borderWidth: 3,
-            },
-        ],
-    };
-
-    if (chLine) {
-        new Chart(chLine, {
-            type: "line",
-            data: chartData,
-            options: {
-                scales: {
-                    yAxes: [
-                        {
-                            ticks: {
-                                beginAtZero: false,
-                            },
-                        },
-                    ],
-                },
-                legend: {
-                    display: false,
-                },
-                zoom: {
-                    // Boolean to enable zooming
-                    enabled: true,
-                    // Zooming directions. Remove the appropriate direction to disable
-                    // Eg. 'y' would only allow zooming in the y direction
-                    mode: "x",
-                },
-            },
-        });
     }
 </script>
 <script
