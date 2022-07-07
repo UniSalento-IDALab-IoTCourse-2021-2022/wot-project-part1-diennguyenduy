@@ -1,0 +1,463 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap"
+            rel="stylesheet"
+    />
+    <link href="static/style.css" rel="stylesheet" />
+    <!-- Latest compiled and minified CSS -->
+    <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+            crossorigin="anonymous"
+    />
+    <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="assets/img/favicon.ico"
+    />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: rgb(12, 12, 12);
+        }
+
+        h3 {
+            text-align: center;
+            color: white;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        div {
+            text-align: center;
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        .button {
+            margin-top: 20px;
+            background-color: #03506f;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        a.profile {
+            position: absolute;
+            right: 0;
+            width: 100px;
+            height: 120px;
+            border: 0px solid blue;
+        }
+    </style>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .nvbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .nvbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .nvbar a:hover {
+            background: #ddd;
+            color: black;
+        }
+
+        .main {
+            padding: 16px;
+            margin-top: 30px;
+            height: 1500px; /* Used in this example to enable scrolling */
+        }
+    </style>
+
+    <!-- Profile -->
+    <style>
+        body {
+            margin-top: 20px;
+            color: #1a202c;
+            text-align: left;
+            background-color: #e2e8f0;
+        }
+        .main-body {
+            padding: 15px;
+        }
+        .card {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+            0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0 solid rgba(0, 0, 0, 0.125);
+            border-radius: 0.25rem;
+        }
+
+        .card-body {
+            flex: 1 1 auto;
+            min-height: 1px;
+            padding: 1rem;
+        }
+
+        .gutters-sm {
+            margin-right: -8px;
+            margin-left: -8px;
+        }
+
+        .gutters-sm > .col,
+        .gutters-sm > [class*="col-"] {
+            padding-right: 8px;
+            padding-left: 8px;
+        }
+        .mb-3,
+        .my-3 {
+            margin-bottom: 1rem !important;
+        }
+
+        .bg-gray-300 {
+            background-color: #e2e8f0;
+        }
+        .h-100 {
+            height: 100% !important;
+        }
+        .shadow-none {
+            box-shadow: none !important;
+        }
+    </style>
+
+    <title>Advanced Health Care Monitoring System</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+</head>
+
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script
+        type="text/javascript"
+        src="https://npmcdn.com/Chart.Zoom.js@0.3.0/Chart.Zoom.min.js"
+></script>
+
+<!--Heading section-->
+<div
+        class="a"
+        style="background-color: #32b1fa; margin-top: 0; position: relative"
+>
+    <!-- <div class="container"></div>  -->
+    <!-- Navbar sec -->
+    <div class="nvbar">
+        <a href="/">Home</a>
+        <a href="/live-data">Live Report</a>
+        <a href="/medicine-time">Medicine Timing</a>
+        <a href="/history">History</a>
+        <a href="/patient-profile" class="profile">Profile</a>
+    </div>
+    <!-- nav end -->
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <h1>Patient's Live Record</h1>
+    <hr />
+    <div class="main-body">
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img
+                                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                    alt="Admin"
+                                    class="rounded-circle"
+                                    width="150"
+                            />
+                            <div class="mt-3">
+                                <h4>Duy Dien Nguyen</h4>
+                                <!-- <p class="text-secondary mb-1">Full Stack Developer</p> -->
+                                <p class="text-muted font-size-sm">Lecce, LE, Italy</p>
+                                <button class="btn btn-outline-primary">Call</button>
+                                <button class="btn btn-outline-primary">Messages</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <ul class="list-group list-group-flush">
+                        <li
+                                class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                        >
+                            <h6 class="mb-0">Patient ID</h6>
+                            <span class="text-secondary">17021215</span>
+                        </li>
+                        <li
+                                class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                        >
+                            <h6 class="mb-0">Age</h6>
+                            <span class="text-secondary">23</span>
+                        </li>
+                        <li
+                                class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                        >
+                            <h6 class="mb-0">Email</h6>
+                            <span class="text-secondary">abc@example.com</span>
+                        </li>
+                        <li
+                                class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                        >
+                            <h6 class="mb-0">Phone</h6>
+                            <span class="text-secondary">+39 123 456 7890</span>
+                        </li>
+                        <li
+                                class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                        >
+                            <h6 class="mb-0">Last check</h6>
+                            <span class="text-secondary">2022-06-13 16:08:22</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8 mb-3">
+                <div class="row gutters-sm">
+                    <div class="col-sm-6 mb-3">
+                        <div class="card h-100">
+                            <h4 class="card-title">Overview</h4>
+                            <div class="center" id="overview-chart" style="width: 100%; max-width: 600px"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 class="card-title">Pulse Rate (BPM)</h4>
+                                <div class="center" id="pulse-rate-chart" style="width: 100%; max-width: 600px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gutters-sm mb-3">
+                    <div class="col-sm-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 class="card-title">Body Temperature (&#8451;)</h4>
+                                <div class="center" id="body-temperature-chart" style="width: 100%; max-width: 600px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 class="card-title">Oxygen Level (%)</h4>
+                                <div class="center" id="oxygen-level-chart" style="width: 100%; max-width: 600px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var socketExample = new WebSocket("ws://localhost:3001");
+
+    socketExample.onopen = function (event) {
+        socketExample.send("Text to be sent to the server!");
+    };
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+    // load current chart package
+    google.charts.load("current", {
+        packages: ["corechart", "line"]
+    });
+    // set callback function when api loaded
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        // create data object with default value
+        let data = google.visualization.arrayToDataTable([
+            ["Second", "Pulse rate", "Oxygen", "Temperature"],
+            [0, 0, 0, 0]
+        ]);
+        // create options object with titles, colors, etc.
+        let options = {
+            hAxis: {
+                title: "Time (3x)"
+            },
+            vAxis: {
+                title: "Value"
+            },
+            animation:{
+                duration: 1000,
+                easing: 'out',
+            },
+            //curveType: 'function',
+            //smoothline: 'true',
+            legend: { position: 'top' }
+        };
+        // draw chart on load
+        let chart = new google.visualization.LineChart(
+            document.getElementById("overview-chart")
+        );
+        chart.draw(data, options);
+        // interval for adding new data every 250ms
+        let index = 0;
+        setInterval(function() {
+            // instead of this random, you can make an ajax call for the current cpu usage or what ever data you want to display
+            let random1 = Math.floor(Math.random() * 100 + 30);
+            let random2 = parseFloat((Math.random() * 20 + 80).toFixed(2));
+            let random3 = parseFloat((Math.random() * 10 + 35).toFixed(1));
+            data.addRow(
+                [index, random1, random2, random3]
+            );
+            chart.draw(data, options);
+            index++;
+        }, 3000);
+    }
+</script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['gauge']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var temperature_data = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['\u00B0C', 0]
+        ]);
+        var pulse_data = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['BPM', 0]
+        ]);
+        var oxygen_data = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['%', 0]
+        ]);
+
+        var options = [
+            {
+                min: 35, max: 45,
+                width: 600, height: 180,
+                redFrom: 30, redTo: 35.6,
+                greenFrom: 35.6, greenTo: 36.7,
+                yellowFrom:36.7, yellowTo: 45,
+                minorTicks: 5
+            },
+            {
+                min: 0, max: 200,
+                width: 600, height: 180,
+                redFrom: 0, redTo: 65,
+                greenFrom: 65, greenTo: 140,
+                yellowFrom:140, yellowTo: 200,
+                minorTicks: 5
+            },
+            {
+                min: 0, max: 100,
+                width: 600, height: 180,
+                redFrom: 0, redTo: 90,
+                yellowFrom:90, yellowTo: 95,
+                greenFrom: 95, greenTo: 100,
+                minorTicks: 5
+            }
+        ];
+
+        var temperature_chart = new google.visualization.Gauge(document.getElementById('body-temperature-chart'));
+        var pulse_chart = new google.visualization.Gauge(document.getElementById('pulse-rate-chart'));
+        var oxygen_chart = new google.visualization.Gauge(document.getElementById('oxygen-level-chart'));
+
+        temperature_chart.draw(temperature_data, options[0]);
+        pulse_chart.draw(pulse_data, options[1]);
+        oxygen_chart.draw(oxygen_data, options[2]);
+
+        // setInterval(function() {
+        //     pulseData.setValue(0, 1, Math.floor(Math.random() * 130 + 50));
+        //     pulseChart.draw(pulseData, options);
+        // }, 3000);
+
+        socketExample.onmessage = function (event) {
+            const object = JSON.parse(event.data);
+            console.log('Websocket received: ', object);
+
+            temperature_data.setValue(0, 1, object.temperature);
+            pulse_data.setValue(0, 1, object.pulse_rate);
+            oxygen_data.setValue(0, 1, object.oxygen_level);
+
+            temperature_chart.draw(temperature_data, options[0]);
+            pulse_chart.draw(pulse_data, options[1]);
+            oxygen_chart.draw(oxygen_data, options[2]);
+        };
+    }
+</script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>

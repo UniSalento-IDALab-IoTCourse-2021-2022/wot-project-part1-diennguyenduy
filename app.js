@@ -32,6 +32,11 @@ app.listen(process.env.port || 8080);
 
 console.log('Running at Port 8080');
 
+router.get('/login',function(req,res){
+    res.sendFile(path.join(__dirname+'/Web/Doctor/login.html'));
+    //__dirname : It will resolve to your project folder.
+});
+
 router.get('/',function(req,res){
     res.sendFile(path.join(__dirname+'/templates/Start.html'));
     //__dirname : It will resolve to your project folder.
