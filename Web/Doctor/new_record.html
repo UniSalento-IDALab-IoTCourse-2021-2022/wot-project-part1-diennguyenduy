@@ -140,7 +140,7 @@
                     <a href="notification_alert.html">Notification Alert</a>
                   </li>
                   <li>
-                    <a href="admin_instruction.html">Admin Instruction</a>
+                    <a href="live_record.html">Admin Instruction</a>
                   </li>
                   <li>
                     <a href="sent_to_admin_user.html">Send to Admin/Users</a>
@@ -192,10 +192,11 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>Date of Birth</label>
-                      <div class="cal-icon">
+                      <div>
                         <input
-                          type="text"
+                          type="date"
                           class="form-control datetimepicker"
+                          min="1900-01-01" max="2022-12-31"
                         />
                       </div>
                     </div>
@@ -317,7 +318,7 @@
                   </div>
                 </div>
                 <div class="m-t-20 text-center">
-                  <button class="btn btn-primary submit-btn">
+                  <button class="btn btn-primary submit-btn" id="addPatient">
                     Create Patient
                   </button>
                 </div>
@@ -583,5 +584,10 @@
     <script src="assets/js/Chart.bundle.js"></script>
     <script src="assets/js/chart.js"></script>
     <script src="assets/js/app.js"></script>
+    <script type="text/javascript">
+      document.getElementById("addPatient").onclick = function () {
+        location.href = "records.html";
+      };
+    </script>
   </body>
 </html>

@@ -81,7 +81,7 @@
             </div>
 
             <div class="container-login100-form-btn">
-              <button class="login100-form-btn" onClick="location.href='index.html'">Login</button>
+              <button class="login100-form-btn" id="login">Login</button>
             </div>
 
             <div class="text-center p-t-12">
@@ -116,5 +116,10 @@
     </script>
     <!--===============================================================================================-->
     <script src="js/main.js"></script>
+    <script type="text/javascript">
+      document.getElementById("login").onclick = function () {
+        location.href = "index.html";
+      };
+    </script>
   </body>
 </html>
