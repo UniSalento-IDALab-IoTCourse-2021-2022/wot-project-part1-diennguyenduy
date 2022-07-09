@@ -65,7 +65,7 @@
               </div>
 
               <!-- Submit -->
-              <button class="btn btn-lg btn-block btn-primary" type="submit">
+              <button id="admin-login" class="btn btn-lg btn-block btn-primary" type="submit">
                 Sign in
               </button>
             </form>
@@ -82,7 +82,11 @@
     <!-- .layout -->
 
     <!-- Scripts -->
-
+    <script type="text/javascript">
+      document.getElementById("admin-login").onclick = function () {
+        location.href = "index.html";
+      };
+    </script>
     <!-- Scripts -->
   </body>
 

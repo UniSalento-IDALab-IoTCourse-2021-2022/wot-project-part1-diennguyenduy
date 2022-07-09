@@ -42,7 +42,7 @@
       <div class="container-login100 p-0">
         <div class="wrap-login100">
           <div class="login100-pic js-tilt" data-tilt>
-            <img src="doc_img.jpg" style="border-radius: 50px" alt="IMG" />
+            <img src="doc_img3.jpg" style="border-radius: 30px" alt="IMG" />
           </div>
 
           <form class="login100-form validate-form">
@@ -64,6 +64,21 @@
               </span>
             </div>
             <div
+                    class="wrap-input100 validate-input"
+                    data-validate="Valid id is required: sal123"
+            >
+              <input
+                      class="input100"
+                      type="text"
+                      name="doctor-id"
+                      placeholder="Dotor ID"
+              />
+              <span class="focus-input100"></span>
+              <span class="symbol-input100">
+                <i class="fa fa-id-card" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div
               class="wrap-input100 validate-input"
               data-validate="Valid email is required: ex@abc.xyz"
             >
@@ -71,14 +86,13 @@
                 class="input100"
                 type="text"
                 name="email"
-                placeholder="Email"
+                placeholder="Email or Phone number"
               />
               <span class="focus-input100"></span>
               <span class="symbol-input100">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
               </span>
             </div>
-
             <div
               class="wrap-input100 validate-input"
               data-validate="Password is required"
@@ -96,7 +110,7 @@
             </div>
 
             <div class="container-login100-form-btn">
-              <button class="login100-form-btn">Register</button>
+              <button class="login100-form-btn" id="doctor-register">Register</button>
             </div>
 
             <div class="text-center p-t-12">
@@ -131,5 +145,10 @@
     </script>
     <!--===============================================================================================-->
     <script src="js/main.js"></script>
+    <script type="text/javascript">
+      document.getElementById("doctor-register").onclick = function () {
+        location.href = "login.html";
+      };
+    </script>
   </body>
 </html>
