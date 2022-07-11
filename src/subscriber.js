@@ -8,11 +8,11 @@ require("dotenv").config();
 //console.log(process.env);
 //const client = mqtt.connect(process.env.LOCALHOST)
 const client = mqtt.connect("mqtt://broker.hivemq.com");
-const topicName = "aedes/test";
+const topicName = "client/heart-failure/#";
 
 const MongoClient = mongodb.MongoClient;
 const uri = "mongodb://localhost/";
-const app = express();
+// const app = express();
 
 const wss = new WebSocket.Server({ port: 3001 });
 
@@ -23,20 +23,20 @@ wss.on("connection", function connection(ws) {
   ws.send("something");
 });
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
-
-app.use(express.json());
-
-app.get("/dashboard", async (req, res) => {
-  res.sendFile(path.join(__dirname + "/index.html"));
-});
+// app.listen(3000, () => {
+//   console.log("Server running on port 3000");
+// });
+// app.use(
+//   express.urlencoded({
+//     extended: true,
+//   })
+// );
+//
+// app.use(express.json());
+//
+// app.get("/dashboard", async (req, res) => {
+//   res.sendFile(path.join(__dirname + "/index.html"));
+// });
 
 // connect to same client and subscribe to same topic name
 client.on("connect", () => {
@@ -64,8 +64,8 @@ client.on("message", (topic, message, packet) => {
       try {
         await client.connect();
 
-        const database = client.db("TemperatureDB");
-        const temperatureColl = database.collection("temperature");
+        const database = client.db("HeartFailureDB");
+        const temperatureColl = database.collection("heart-failure");
         // create a document to be inserted
         // const doc = {
         //   value: temperature,

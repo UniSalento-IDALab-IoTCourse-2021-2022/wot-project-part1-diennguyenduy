@@ -13,7 +13,8 @@ require("dotenv").config();
 //// }
 
 //the client id is used by the MQTT broker to keep track of clients and and their // state
-const clientId = "mqttjs_" + Math.random().toString(8).substring(2, 4);
+// const clientId = "mqttjs_" + Math.random().toString(8).substring(2, 4);
+const clientId = "jenniferR01";
 // console.log(process.env.LOCALHOST)
 // const client = mqtt.connect(process.env.LOCALHOST, {clientId:clientId, clean:false, reconnectPeriod:1})
 
@@ -22,7 +23,8 @@ const client = mqtt.connect("mqtt://broker.hivemq.com", {
   clean: false,
   reconnectPeriod: 1,
 });
-const topicName = "aedes/test";
+const topicName = "client/heart-failure/" + clientId;
+
 
 client.on("connect", function (connack) {
   console.log("Client connected", connack);
@@ -32,36 +34,54 @@ client.on("error", function (error) {
 });
 
 setInterval(function () {
+  console.log('Topic: ', topicName);
   ////var readout = sensorLib.read();
   //var temperature = readout.temperature.toFixed(1)
   ////console.log('Temperature:', temperature + 'C');
 
-  let temperature = (Math.random() * 5 + 35).toFixed(1); //random in range (35,40)
-  let heart_rate = Math.floor(Math.random() * 100 + 30); //random in range (30,130)
-  let oxygen = (Math.random() * 100).toFixed(2); //random in range (0,100)%
-  if (
-    temperature < 36 ||
-    temperature > 37.5 ||
-    heart_rate < 60 ||
-    heart_rate > 100 ||
-    oxygen < 95
-  ) {
-    console.log("Dangerous case!");
-    //play alert sound & LED turns on
-    //send message to the doctor & patient's family via twillio or vonage
-  }
+  let restingBP = Math.floor(Math.random() * 200); // 0-200
+  let cholesterol = Math.floor(Math.random() * 603); //0-603
+  let fastingBS = Math.floor(Math.random() * 120 + 80);  // if > 120 mg/dl -> 1 || 0
+  let restingECG = Math.floor(Math.random() * 4); // 3 types
+  let MaxHR = Math.floor(Math.random() * 142 + 60);  // 60-202
 
-  const data = JSON.stringify({
+  const body_data = JSON.stringify({
     patient_id: clientId,
     timestamp: new Date().toISOString(),
-    temperature: temperature,
-    pulse_rate: heart_rate,
-    oxygen_level: oxygen
+    restingBP: restingBP,
+    cholesterol: cholesterol,
+    fastingBS: fastingBS,
+    restingECG: restingECG,
+    MaxHR: MaxHR,
   });
-  console.log(data);
+  console.log(body_data);
+
+  // let temperature = (Math.random() * 5 + 35).toFixed(1); //random in range (35,40)
+  // let heart_rate = Math.floor(Math.random() * 100 + 30); //random in range (30,130)
+  // let oxygen = (Math.random() * 100).toFixed(2); //random in range (0,100)%
+  // if (
+  //   temperature < 36 ||
+  //   temperature > 37.5 ||
+  //   heart_rate < 60 ||
+  //   heart_rate > 100 ||
+  //   oxygen < 95
+  // ) {
+  //   console.log("Dangerous case!");
+  //   //play alert sound & LED turns on
+  //   //send message to the doctor & patient's family via twillio or vonage
+  // }
+  //
+  // const data = JSON.stringify({
+  //   patient_id: clientId,
+  //   timestamp: new Date().toISOString(),
+  //   temperature: temperature,
+  //   pulse_rate: heart_rate,
+  //   oxygen_level: oxygen
+  // });
+  // console.log(data);
   client.publish(
     topicName,
-    data,
+      body_data,
     { qos: 1, retain: true },
     (PacketCallback, err) => {
       if (err) {
