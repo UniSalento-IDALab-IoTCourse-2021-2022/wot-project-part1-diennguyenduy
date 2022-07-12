@@ -1,19 +1,8 @@
-// const spawn = require('child_process').spawn;
-//
-// const process = spawn('python', ['./test.py']);
-//
-// process.stdout.on('data', data => {
-//    console.log(data.toString());
-// });
 var request = require("request-promise");
 
-async function arraysum() {
-   // This variable contains the data
-   // you want to send
-   var data = {
-      array: [23, 1, 150, 0, 0, 150, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0],
-   };
 
+module.exports = async function MLPredict(data) {
+    let prediction;
    var options = {
       method: "POST",
 
@@ -32,15 +21,17 @@ async function arraysum() {
        .then(function (parsedBody) {
           console.log(parsedBody);
 
-          // You can do something with
-          // returned data
-          let result;
-          result = parsedBody["result"];
-          console.log("Predicted result: ", result);
+          // Do something with returned data
+           prediction = parsedBody["result"];
+          // console.log(prediction);
        })
        .catch(function (err) {
           console.log(err);
        });
-}
 
-arraysum();
+   if(prediction == 1) {
+       console.log("DANGEROUS!!! You are at risk of heart failure!");
+       // Play alert sound
+       // Send message to doctor & patient
+   }
+}

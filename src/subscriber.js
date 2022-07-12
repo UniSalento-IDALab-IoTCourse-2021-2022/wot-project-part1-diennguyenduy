@@ -9,6 +9,8 @@ require("dotenv").config();
 //const client = mqtt.connect(process.env.LOCALHOST)
 const client = mqtt.connect("mqtt://broker.hivemq.com");
 const topicName = "client/heart-failure/#";
+const clientJenniferR01 = "client/heart-failure/jenniferR01";
+// A wildcard can only be used to subscribe to topics, not to publish a message.
 
 const MongoClient = mongodb.MongoClient;
 const uri = "mongodb://localhost/";
@@ -52,12 +54,9 @@ client.on("connect", () => {
 // on receive message event, log the message to the console
 client.on("message", (topic, message, packet) => {
   console.log(packet, packet.payload.toString());
-  if (topic === topicName) {
+  if (topic === clientJenniferR01) {
     var rev_message = JSON.parse(message);
-    console.log(rev_message);
-    // var temperature = rev_message.temperature;
-    // var timestamp = rev_message.timestamp;
-    // var sensor = rev_message.sensor;
+    console.log('Client JenniferR01 data: ', rev_message);
 
     async function pushInDb() {
       const client = new MongoClient(uri, { useUnifiedTopology: true });
@@ -65,14 +64,7 @@ client.on("message", (topic, message, packet) => {
         await client.connect();
 
         const database = client.db("HeartFailureDB");
-        const temperatureColl = database.collection("heart-failure");
-        // create a document to be inserted
-        // const doc = {
-        //   value: temperature,
-        //   timestamp: timestamp,
-        //   sensorId: sensor,
-        //   roomId: "room1",
-        // };
+        const temperatureColl = database.collection("JenniferR01");
 
         const result = await temperatureColl.insertOne(rev_message);
         console.log(

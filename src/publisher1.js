@@ -1,6 +1,7 @@
 ////const sensorLib = require('node-dht-sensor'); // include existing module called 'node-dht-sensor'
 const mqtt = require("mqtt");
 require("dotenv").config();
+const MLPredict = require('../machine_learning/MLpredict');
 
 //// Setup sensor, exit if failed
 //// var sensorType = 11; // 11 for DHT11, 22 for DHT22 and AM2302
@@ -46,17 +47,17 @@ setInterval(function () {
   let MaxHR = Math.floor(Math.random() * 142 + 60);  // 60-202
 
   // Local analyze
-  if (
-      restingBP < 36 ||
-      cholesterol > 37.5 ||
-      fastingBS > 120 ||
-      restingECG > 150 ||
-      MaxHR < 95
-  ) {
-    console.log("Dangerous case!");
-    //play alert sound & LED turns on
-    //send message to the doctor via twillio or vonage
-  }
+  // if (
+  //     restingBP < 36 ||
+  //     cholesterol > 37.5 ||
+  //     fastingBS > 120 ||
+  //     restingECG > 150 ||
+  //     MaxHR < 95
+  // ) {
+  //   console.log("Dangerous case!");
+  //   //play alert sound & LED turns on
+  //   //send message to the doctor via twillio or vonage
+  // }
 
   const body_data = JSON.stringify({
     patient_id: clientId,
@@ -69,29 +70,16 @@ setInterval(function () {
   });
   console.log(body_data);
 
-  // let temperature = (Math.random() * 5 + 35).toFixed(1); //random in range (35,40)
-  // let heart_rate = Math.floor(Math.random() * 100 + 30); //random in range (30,130)
-  // let oxygen = (Math.random() * 100).toFixed(2); //random in range (0,100)%
-  // if (
-  //   temperature < 36 ||
-  //   temperature > 37.5 ||
-  //   heart_rate < 60 ||
-  //   heart_rate > 100 ||
-  //   oxygen < 95
-  // ) {
-  //   console.log("Dangerous case!");
-  //   //play alert sound & LED turns on
-  //   //send message to the doctor & patient's family via twillio or vonage
-  // }
-  //
-  // const data = JSON.stringify({
-  //   patient_id: clientId,
-  //   timestamp: new Date().toISOString(),
-  //   temperature: temperature,
-  //   pulse_rate: heart_rate,
-  //   oxygen_level: oxygen
-  // });
-  // console.log(data);
+  // Local analyze the data of the JenniferR01 patient
+  var data = {
+    array: [70, 0, restingBP,
+      cholesterol, fastingBS,
+      MaxHR, 0, 0, 1, 0, 0, 0,
+      1, 0, 0, 0, 1, 0],
+  };
+  MLPredict(data);
+
+
   client.publish(
     topicName,
       body_data,
