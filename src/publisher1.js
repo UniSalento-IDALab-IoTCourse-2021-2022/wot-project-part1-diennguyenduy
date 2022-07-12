@@ -45,6 +45,19 @@ setInterval(function () {
   let restingECG = Math.floor(Math.random() * 4); // 3 types
   let MaxHR = Math.floor(Math.random() * 142 + 60);  // 60-202
 
+  // Local analyze
+  if (
+      restingBP < 36 ||
+      cholesterol > 37.5 ||
+      fastingBS > 120 ||
+      restingECG > 150 ||
+      MaxHR < 95
+  ) {
+    console.log("Dangerous case!");
+    //play alert sound & LED turns on
+    //send message to the doctor via twillio or vonage
+  }
+
   const body_data = JSON.stringify({
     patient_id: clientId,
     timestamp: new Date().toISOString(),
