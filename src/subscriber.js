@@ -8,8 +8,8 @@ require("dotenv").config();
 //console.log(process.env);
 //const client = mqtt.connect(process.env.LOCALHOST)
 const client = mqtt.connect("mqtt://broker.hivemq.com");
-const topicName = "client/heart-failure/#";
-const clientJenniferR01 = "client/heart-failure/jenniferR01";
+//const topicName = "client/heart-failure/#";
+const topicName = "client/heart-failure/JenniferR01";
 // A wildcard can only be used to subscribe to topics, not to publish a message.
 
 const MongoClient = mongodb.MongoClient;
@@ -54,7 +54,7 @@ client.on("connect", () => {
 // on receive message event, log the message to the console
 client.on("message", (topic, message, packet) => {
   console.log(packet, packet.payload.toString());
-  if (topic === clientJenniferR01) {
+  if (topic === topicName) {
     var rev_message = JSON.parse(message);
     console.log('Client JenniferR01 data: ', rev_message);
 

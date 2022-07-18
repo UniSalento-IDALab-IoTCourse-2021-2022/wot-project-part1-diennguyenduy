@@ -3,7 +3,7 @@ import numpy as np
 import joblib
 import random
 import time
-trained_model = joblib.load("../machine_learning/LogisticRegression_model.pkl")
+trained_model = joblib.load("../machine_learning/model/LogisticRegression_model.pkl")
 
 
 def predict(data):

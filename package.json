@@ -1,7 +1,6 @@
 {
-  "name": "mqtt-broker",
+  "name": "wot-project",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start-broker": "nodemon ./src/broker.js"
@@ -23,5 +22,15 @@
     "request-promise": "^4.2.6",
     "twilio": "^3.77.2",
     "ws": "^8.8.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UniSalento-IDALab-IoTCourse-2021-2022/wot-project-part1-diennguyenduy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/UniSalento-IDALab-IoTCourse-2021-2022/wot-project-part1-diennguyenduy/issues"
+  },
+  "homepage": "https://github.com/UniSalento-IDALab-IoTCourse-2021-2022/wot-project-part1-diennguyenduy#readme",
+  "description": ""
 }

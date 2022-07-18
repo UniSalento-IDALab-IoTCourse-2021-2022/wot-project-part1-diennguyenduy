@@ -1,0 +1,22 @@
+{
+  "id": "JenniferR01",
+  "information": {
+    "age": 70,
+    "gender": 0
+  },
+  "historical": {
+    "ChestPainType": {
+      "ASY": 1,
+      "ATA": 0,
+      "NAP": 0,
+      "TA": 0
+    },
+    "ExerciseAngina": 0,
+    "OldPeak": 0,
+    "ST_Slope": {
+      "Down": 1,
+      "Flat": 0,
+      "Up": 0
+    }
+  }
+}
