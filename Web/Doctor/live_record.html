@@ -343,7 +343,7 @@
       );
       chart.draw(data, options);
       index++;
-    }, 3000);
+    }, 5000);
   }
 </script>
 <script type="text/javascript">
@@ -445,8 +445,7 @@
       const object = JSON.parse(event.data);
       console.log('Websocket received: ', object);
 
-      // hf_prediction_data.setValue(0, 1, object.predicted);
-      hf_prediction_data.setValue(0, 1, (Math.random()>=0.5)? 1 : 0);
+      hf_prediction_data.setValue(0, 1, object.predicted);
       resting_bp_data.setValue(0, 1, object.restingBP);
       cholesterol_data.setValue(0, 1, object.cholesterol);
       fasting_bs_data.setValue(0, 1, object.fastingBS);

@@ -63,17 +63,6 @@ module.exports = function publish(client_id, client_info, client_history) {
     //   //send message to the doctor via twillio or vonage
     // }
 
-    const body_data = JSON.stringify({
-      patient_id: clientId,
-      timestamp: new Date().toISOString(),
-      restingBP: restingBP,
-      cholesterol: cholesterol,
-      fastingBS: fastingBS,
-      restingECG: restingECG,
-      MaxHR: MaxHR,
-    });
-    console.log(body_data);
-
     // Local analyze the data of the patient
     let ExerciseAngina = client_history.ExerciseAngina;
     let OldPeak = client_history.OldPeak;
@@ -88,7 +77,8 @@ module.exports = function publish(client_id, client_info, client_history) {
         ST.Down, ST.Flat, ST.Up],
     };
 
-    count += await MLPredict(data);
+    let predicted = await MLPredict(data);
+    count += predicted;
     if(count == 5) {
       let from = "Vonage APIs";
       let to = "393313432937";
@@ -96,6 +86,18 @@ module.exports = function publish(client_id, client_info, client_history) {
 
       sendMessage(from, to, text);
     }
+
+    const body_data = JSON.stringify({
+      patient_id: clientId,
+      timestamp: new Date().toISOString(),
+      restingBP: restingBP,
+      cholesterol: cholesterol,
+      fastingBS: fastingBS,
+      restingECG: restingECG,
+      MaxHR: MaxHR,
+      predicted: predicted
+    });
+    console.log(body_data);
 
     client.publish(
       topicName,
