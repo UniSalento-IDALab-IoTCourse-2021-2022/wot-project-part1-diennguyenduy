@@ -84,7 +84,7 @@ module.exports = function publish(client_id, client_info, client_history) {
       let to = "393313432937";
       let text = 'Client ' + client_id + ' was predicted 5 times with heart failure. Check now! http://localhost:63342/wot-project-part1-diennguyenduy/Web/Doctor/live_record.html?_ijt=3vcqe2ecj6k4sgigppsufu9muj&_ij_reload=RELOAD_ON_SAVE';
 
-      sendMessage(from, to, text);
+      //sendMessage(from, to, text);
     }
 
     const body_data = JSON.stringify({

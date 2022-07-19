@@ -349,9 +349,9 @@
             <div class="col-sm-4 mb-3">
               <div class="card h-100">
                 <div class="card-body">
-                  <h4 class="card-title">Oxygen Level (%)</h4>
+                  <h4 class="card-title">Cholesterol (mg/dL)</h4>
                   <canvas
-                          id="oxygen-chart"
+                          id="cholesterol-chart"
                           style="width: 100%; max-width: 600px"
                   ></canvas>
                 </div>
@@ -360,7 +360,7 @@
             <div class="col-sm-4 mb-3">
               <div class="card h-100">
                 <div class="card-body">
-                  <h4 class="card-title">Pulse Rate (BPM)</h4>
+                  <h4 class="card-title">Heart Rate (BPM)</h4>
                   <canvas
                           id="pulse-chart"
                           style="width: 100%; max-width: 600px"
@@ -371,7 +371,7 @@
             <div class="col-sm-4 mb-3">
               <div class="card h-100">
                 <div class="card-body">
-                  <h4 class="card-title">Body Temperature (&#8451;)</h4>
+                  <h4 class="card-title">Resting BP (mmHg)</h4>
                   <canvas
                           id="temperature-chart"
                           style="width: 100%; max-width: 600px"
@@ -398,7 +398,7 @@
   ];
 
   /* large line chart */
-  var chLine = document.getElementById("oxygen-chart");
+  var chLine = document.getElementById("cholesterol-chart");
   var chartData = {
     labels: [
       "Jan",
@@ -413,7 +413,7 @@
     ],
     datasets: [
       {
-        data: [100, 95, 97, 93, 99, 98, 96, 92, 97],
+        data: [200, 305, 250, 120, 100, 187, 296, 311, 197],
         backgroundColor: colors[3],
         borderColor: colors[1],
         borderWidth: 3,
@@ -475,7 +475,7 @@
     ],
     datasets: [
       {
-        data: [90, 80, 95, 85, 100, 105, 94, 99, 87],
+        data: [90, 86, 95, 92, 100, 105, 94, 99, 87],
         backgroundColor: colors[5],
         borderColor: colors[2],
         borderWidth: 3,
@@ -537,7 +537,7 @@
     ],
     datasets: [
       {
-        data: [37.5, 36.7, 35.6, 37, 37.5, 38, 36.9, 36.5, 37.6],
+        data: [80, 98, 108, 100, 76, 84, 102, 110, 132],
         backgroundColor: colors[3],
         borderColor: colors[1],
         borderWidth: 3,
