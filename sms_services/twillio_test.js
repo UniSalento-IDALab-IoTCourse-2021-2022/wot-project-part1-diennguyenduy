@@ -5,10 +5,10 @@ const accountSid = 'AC6cdc70d2914ce68dec5ed69b9b534c18';
 const authToken = '3d3ac085c6339007546ad84362304272';
 const client = require('twilio')(accountSid, authToken);
 
-function sendMessage() {
+module.exports = function sendMessage(client_id) {
     client.messages
         .create({
-            body: 'Alert! Patient is in dangerous!',
+            body: 'Alert! Client' + client_id * 'is in dangerous!',
             from: '+14582178841',
             to: '+393313432937'
         })

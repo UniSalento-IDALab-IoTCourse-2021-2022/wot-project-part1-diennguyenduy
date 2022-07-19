@@ -16,6 +16,7 @@
     "ml-logistic-regression": "^2.0.0",
     "mongodb": "^4.7.0",
     "mqtt": "^4.3.7",
+    "nodemailer": "^6.7.7",
     "nodemon": "^2.0.15",
     "play-sound": "^1.1.5",
     "python-shell": "^3.0.1",
@@ -23,7 +24,6 @@
     "twilio": "^3.77.2",
     "ws": "^8.8.0"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/UniSalento-IDALab-IoTCourse-2021-2022/wot-project-part1-diennguyenduy.git"

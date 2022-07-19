@@ -3,7 +3,7 @@ import numpy as np
 import joblib
 import random
 import time
-trained_model = joblib.load("../machine_learning/model/LogisticRegression_model.pkl")
+trained_model = joblib.load("../machine_learning/model/model.pkl")
 
 
 def predict(data):
@@ -50,8 +50,9 @@ try:
         # data.extend(generated_data)
 
         ytest = pd.DataFrame(np.reshape(generated_data, (1, 18)))
-        ytest.columns = ['Age', 'Sex', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'ExerciseAngina', 'Oldpeak', 'ChestPainType_ASY',	'ChestPainType_ATA',
-                         'ChestPainType_NAP',	'ChestPainType_TA', 'RestingECG_LVH', 'RestingECG_Normal', 'RestingECG_ST', 'ST_Slope_Down', 'ST_Slope_Flat', 'ST_Slope_Up']
+        #ytest.columns = ['Age', 'Sex', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'ExerciseAngina', 'Oldpeak', 'ChestPainType_ASY',	'ChestPainType_ATA',
+        #                 'ChestPainType_NAP',	'ChestPainType_TA', 'RestingECG_LVH', 'RestingECG_Normal', 'RestingECG_ST', 'ST_Slope_Down', 'ST_Slope_Flat', 'ST_Slope_Up']
+        ytest.columns = joblib.load("model/lgr_columns.pkl")
         result = predict(ytest)[0]
         print('Predict', i, ':', result)
         i += 1

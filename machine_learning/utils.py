@@ -1,9 +1,9 @@
 import joblib
 
 
-def predict_price(data):
+def predict_hf(data):
 
-    trained_model = joblib.load("model/LogisticRegression_model.pkl")
+    trained_model = joblib.load("model/model.pkl")
     predictions = trained_model.predict(data)
 
     return predictions

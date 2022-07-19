@@ -38,7 +38,7 @@ def predict():
 
     ytest = pd.DataFrame(np.reshape(data, (1, 18)))
     ytest.columns = joblib.load("model/lgr_columns.pkl")
-    predicted = utils.predict_price(ytest)[0]  # PROBLEM HERE
+    predicted = utils.predict_hf(ytest)[0]
     print(predicted)
 
     # print('Predict', i, ':', result)

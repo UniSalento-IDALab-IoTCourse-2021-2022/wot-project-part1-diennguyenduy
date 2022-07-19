@@ -2,6 +2,7 @@
 const mqtt = require("mqtt");
 require("dotenv").config();
 const MLPredict = require('../machine_learning/MLpredict');
+const sendMessage = require('../sms_services/vonage_test');
 
 
 module.exports = function publish(client_id, client_info, client_history) {
@@ -18,6 +19,7 @@ module.exports = function publish(client_id, client_info, client_history) {
   //the client id is used by the MQTT broker to keep track of clients and and their // state
   // const clientId = "mqttjs_" + Math.random().toString(8).substring(2, 4);
   const clientId = client_id;
+  var count = 0;
   // console.log(process.env.LOCALHOST)
   // const client = mqtt.connect(process.env.LOCALHOST, {clientId:clientId, clean:false, reconnectPeriod:1})
 
@@ -36,7 +38,7 @@ module.exports = function publish(client_id, client_info, client_history) {
     console.log("Can't connect", error);
   });
 
-  setInterval(function () {
+  setInterval(async function () {
     console.log('Topic: ', topicName);
     ////var readout = sensorLib.read();
     //var temperature = readout.temperature.toFixed(1)
@@ -85,8 +87,15 @@ module.exports = function publish(client_id, client_info, client_history) {
         1, 0, 0,
         ST.Down, ST.Flat, ST.Up],
     };
-    MLPredict(data);
 
+    count += await MLPredict(data);
+    if(count == 5) {
+      let from = "Vonage APIs";
+      let to = "393313432937";
+      let text = 'Client ' + client_id + ' was predicted 5 times with heart failure. Check now! http://localhost:63342/wot-project-part1-diennguyenduy/Web/Doctor/live_record.html?_ijt=3vcqe2ecj6k4sgigppsufu9muj&_ij_reload=RELOAD_ON_SAVE';
+
+      sendMessage(from, to, text);
+    }
 
     client.publish(
       topicName,
@@ -98,7 +107,7 @@ module.exports = function publish(client_id, client_info, client_history) {
         }
       }
     );
-  }, 3000);
+  }, 5000);
 
   client.on("error", function (err) {
     console.log("Error: " + err);

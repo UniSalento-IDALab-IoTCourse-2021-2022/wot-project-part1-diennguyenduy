@@ -5,11 +5,9 @@ const vonage = new Vonage({
     apiSecret: "eMWFakmoB4l5KHfk"
 })
 
-const from = "Vonage APIs"
-const to = "393313432937"
-const text = 'Doctor Dien from UniSalHart: Emergency case! Go to the hospital now!'
 
-function sendMessage() {
+
+module.exports = function sendMessage(from, to, text) {
     vonage.message.sendSms(from, to, text, (err, responseData) => {
         if (err) {
             console.log(err);

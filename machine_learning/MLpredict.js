@@ -29,9 +29,5 @@ module.exports = async function MLPredict(data) {
           console.log(err);
        });
 
-   if(prediction == 1) {
-       console.log("DANGEROUS!!! You are at risk of heart failure!");
-       // Play alert sound
-       // Send message to doctor & patient
-   }
+   return prediction;
 }
